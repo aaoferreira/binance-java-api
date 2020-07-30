@@ -19,6 +19,9 @@ public class MarketDataStreamExample {
     // Listen for aggregated trade events for ETH/BTC
     client.onAggTradeEvent("ethbtc", response -> System.out.println(response));
 
+    // Listen for book ticker events for ETH/BTC
+    client.onBookTicker("ethbtc", response -> System.out.println(response));
+
     // Listen for changes in the order book in ETH/BTC
     client.onDepthEvent("ethbtc", response -> System.out.println(response));
 
