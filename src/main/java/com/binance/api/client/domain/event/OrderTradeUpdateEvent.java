@@ -59,6 +59,12 @@ public class OrderTradeUpdateEvent {
   private String price;
 
   /**
+   * Stop Price.
+   */
+  @JsonProperty("P")
+  private String stopPrice;
+
+  /**
    * Type of execution.
    */
   @JsonProperty("x")
@@ -220,6 +226,14 @@ public class OrderTradeUpdateEvent {
     this.price = price;
   }
 
+  public String getStopPrice() {
+    return stopPrice;
+  }
+
+  public void setStopPrice(String stopPrice) {
+    this.stopPrice = stopPrice;
+  }
+
   public ExecutionType getExecutionType() {
     return executionType;
   }
@@ -352,6 +366,7 @@ public class OrderTradeUpdateEvent {
         .append("timeInForce", timeInForce)
         .append("originalQuantity", originalQuantity)
         .append("price", price)
+        .append("stopPrice", stopPrice)
         .append("executionType", executionType)
         .append("orderStatus", orderStatus)
         .append("orderRejectReason", orderRejectReason)
