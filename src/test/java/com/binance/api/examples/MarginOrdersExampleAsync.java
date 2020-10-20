@@ -7,7 +7,7 @@ import com.binance.api.client.domain.account.request.CancelOrderRequest;
 import com.binance.api.client.domain.account.request.OrderRequest;
 import com.binance.api.client.domain.account.request.OrderStatusRequest;
 
-import static com.binance.api.client.domain.account.NewOrder.limitBuy;
+import static com.binance.api.client.domain.account.NewMarginOrder.limitBuy;
 
 /**
  * Examples on how to place orders, cancel them, and query account information.
@@ -30,7 +30,7 @@ public class MarginOrdersExampleAsync {
         response -> System.out.println(response));
 
     // Placing a real LIMIT order
-    client.newOrder(limitBuy("LINKETH", TimeInForce.GTC, "1000", "0.0001"),
+    client.newMarginOrder(limitBuy("LINKETH", TimeInForce.GTC, "1000", "0.0001"),
         response -> System.out.println(response));
   }
 }

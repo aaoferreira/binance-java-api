@@ -209,11 +209,12 @@ public interface BinanceApiService {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @POST("/sapi/v1/margin/order")
-    Call<NewOrderResponse> newMarginOrder(@Query("symbol") String symbol, @Query("side") OrderSide side, @Query("type") OrderType type,
-                                          @Query("timeInForce") TimeInForce timeInForce, @Query("quantity") String quantity, @Query("price") String price,
-                                          @Query("newClientOrderId") String newClientOrderId, @Query("stopPrice") String stopPrice,
+    Call<NewOrderResponse> newMarginOrder(@Query("symbol") String symbol, @Query("isIsolated") String isIsolated, @Query("side") OrderSide side,
+                                          @Query("type") OrderType type, @Query("timeInForce") TimeInForce timeInForce, @Query("quantity") String quantity,
+                                          @Query("price") String price, @Query("newClientOrderId") String newClientOrderId, @Query("stopPrice") String stopPrice,
                                           @Query("icebergQty") String icebergQty, @Query("newOrderRespType") NewOrderResponseType newOrderRespType,
-                                          @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+                                          @Query("sideEffectType") SideEffectType sideEffectType, @Query("recvWindow") Long recvWindow,
+                                          @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @DELETE("/sapi/v1/margin/order")

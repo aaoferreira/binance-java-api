@@ -46,10 +46,11 @@ public class BinanceApiAsyncMarginRestClientImpl implements BinanceApiAsyncMargi
   }
 
   @Override
-  public void newOrder(NewOrder order, BinanceApiCallback<NewOrderResponse> callback) {
-    binanceApiService.newMarginOrder(order.getSymbol(), order.getSide(), order.getType(),
-            order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(), order.getStopPrice(),
-            order.getIcebergQty(), order.getNewOrderRespType(), order.getRecvWindow(), order.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  public void newMarginOrder(NewMarginOrder order, BinanceApiCallback<NewOrderResponse> callback) {
+    binanceApiService.newMarginOrder(order.getSymbol(), String.valueOf(order.isIsolated()).toUpperCase(), order.getSide(),
+        order.getType(), order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(),
+        order.getStopPrice(), order.getIcebergQty(), order.getNewOrderRespType(), order.getSideEffectType(), order.getRecvWindow(),
+        order.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
   @Override

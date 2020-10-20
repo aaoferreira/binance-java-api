@@ -38,10 +38,11 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
   }
 
   @Override
-  public NewOrderResponse newOrder(NewOrder order) {
-    return executeSync(binanceApiService.newMarginOrder(order.getSymbol(), order.getSide(), order.getType(),
-            order.getTimeInForce(), order.getQuantity(), order.getPrice(), order.getNewClientOrderId(), order.getStopPrice(),
-            order.getIcebergQty(), order.getNewOrderRespType(), order.getRecvWindow(), order.getTimestamp()));
+  public NewOrderResponse newMarginOrder(NewMarginOrder order) {
+    return executeSync(binanceApiService.newMarginOrder(order.getSymbol(), String.valueOf(order.isIsolated()).toUpperCase(),
+        order.getSide(), order.getType(), order.getTimeInForce(), order.getQuantity(), order.getPrice(),
+        order.getNewClientOrderId(), order.getStopPrice(), order.getIcebergQty(), order.getNewOrderRespType(),
+        order.getSideEffectType(), order.getRecvWindow(), order.getTimestamp()));
   }
 
   @Override
