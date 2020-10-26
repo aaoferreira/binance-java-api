@@ -62,14 +62,15 @@ public class BinanceApiAsyncMarginRestClientImpl implements BinanceApiAsyncMargi
 
   @Override
   public void getOrderStatus(OrderStatusRequest orderStatusRequest, BinanceApiCallback<Order> callback) {
-    binanceApiService.getMarginOrderStatus(orderStatusRequest.getSymbol(),
+    binanceApiService.getMarginOrderStatus(orderStatusRequest.getSymbol(), orderStatusRequest.isIsolated(),
             orderStatusRequest.getOrderId(), orderStatusRequest.getOrigClientOrderId(),
             orderStatusRequest.getRecvWindow(), orderStatusRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
   @Override
-  public void getMyTrades(String symbol, BinanceApiCallback<List<Trade>> callback) {
-    binanceApiService.getMyTrades(symbol, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()).enqueue(new BinanceApiCallbackAdapter<>(callback));
+  public void getMyTrades(String symbol, boolean isolated, BinanceApiCallback<List<Trade>> callback) {
+    binanceApiService.getMyMarginTrades(symbol, isolated, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW,
+        System.currentTimeMillis()).enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
 
   // user stream endpoints

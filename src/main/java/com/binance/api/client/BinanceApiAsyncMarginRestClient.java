@@ -62,9 +62,10 @@ public interface BinanceApiAsyncMarginRestClient {
    * Get margin trades for a specific symbol (async).
    *
    * @param symbol symbol to get trades from
-   * @return a list of trades
+   * @param isolated isolated margin
+   * @param callback list of trades callback
    */
-  void getMyTrades(String symbol, BinanceApiCallback<List<Trade>> callback);
+  void getMyTrades(String symbol, boolean isolated, BinanceApiCallback<List<Trade>> callback);
 
   // User stream endpoints
 

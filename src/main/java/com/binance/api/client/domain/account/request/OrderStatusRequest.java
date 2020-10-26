@@ -12,6 +12,8 @@ public class OrderStatusRequest extends OrderRequest {
 
   private String origClientOrderId;
 
+  private boolean isolated;
+
   public OrderStatusRequest(String symbol, Long orderId) {
     super(symbol);
     this.orderId = orderId;
@@ -40,11 +42,21 @@ public class OrderStatusRequest extends OrderRequest {
     return this;
   }
 
+  public boolean isIsolated() {
+    return isolated;
+  }
+
+  public OrderStatusRequest isolated(boolean isolated) {
+    this.isolated = isolated;
+    return this;
+  }
+
   @Override
   public String toString() {
     return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
         .append("orderId", orderId)
         .append("origClientOrderId", origClientOrderId)
+        .append("isolated", isolated)
         .toString();
   }
 }

@@ -14,6 +14,8 @@ public class AllOrdersRequest extends OrderRequest {
 
   private Integer limit;
 
+  private boolean isolated;
+
   public AllOrdersRequest(String symbol) {
     super(symbol);
     this.limit = DEFAULT_LIMIT;
@@ -37,11 +39,23 @@ public class AllOrdersRequest extends OrderRequest {
     return this;
   }
 
+  public boolean isIsolated()
+  {
+    return isolated;
+  }
+
+  public AllOrdersRequest isloated(final boolean isloated)
+  {
+    this.isolated = isloated;
+    return this;
+  }
+
   @Override
   public String toString() {
     return new ToStringBuilder(this, BinanceApiConstants.TO_STRING_BUILDER_STYLE)
         .append("orderId", orderId)
         .append("limit", limit)
+        .append("isolated", isolated)
         .toString();
   }
 }

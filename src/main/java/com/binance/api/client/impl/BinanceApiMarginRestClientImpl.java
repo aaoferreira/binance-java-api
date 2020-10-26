@@ -4,10 +4,7 @@ import com.binance.api.client.BinanceApiMarginRestClient;
 import com.binance.api.client.constant.BinanceApiConstants;
 import com.binance.api.client.domain.TransferType;
 import com.binance.api.client.domain.account.*;
-import com.binance.api.client.domain.account.request.CancelOrderRequest;
-import com.binance.api.client.domain.account.request.CancelOrderResponse;
-import com.binance.api.client.domain.account.request.OrderRequest;
-import com.binance.api.client.domain.account.request.OrderStatusRequest;
+import com.binance.api.client.domain.account.request.*;
 
 import java.util.List;
 
@@ -38,6 +35,13 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
   }
 
   @Override
+  public List<Order> getAllOrders(AllOrdersRequest orderRequest) {
+    return executeSync(binanceApiService.getAllMarginOrders(orderRequest.getSymbol(), orderRequest.isIsolated(),
+        orderRequest.getOrderId(), orderRequest.getLimit(),
+        orderRequest.getRecvWindow(), orderRequest.getTimestamp()));
+  }
+
+  @Override
   public NewOrderResponse newMarginOrder(NewMarginOrder order) {
     return executeSync(binanceApiService.newMarginOrder(order.getSymbol(), String.valueOf(order.isIsolated()).toUpperCase(),
         order.getSide(), order.getType(), order.getTimeInForce(), order.getQuantity(), order.getPrice(),
@@ -54,14 +58,15 @@ public class BinanceApiMarginRestClientImpl implements BinanceApiMarginRestClien
 
   @Override
   public Order getOrderStatus(OrderStatusRequest orderStatusRequest) {
-    return executeSync(binanceApiService.getMarginOrderStatus(orderStatusRequest.getSymbol(),
+    return executeSync(binanceApiService.getMarginOrderStatus(orderStatusRequest.getSymbol(), orderStatusRequest.isIsolated(),
             orderStatusRequest.getOrderId(), orderStatusRequest.getOrigClientOrderId(),
             orderStatusRequest.getRecvWindow(), orderStatusRequest.getTimestamp()));
   }
 
   @Override
-  public List<Trade> getMyTrades(String symbol) {
-    return executeSync(binanceApiService.getMyTrades(symbol, null, null, BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
+  public List<Trade> getMyTrades(String symbol, boolean isolated) {
+    return executeSync(binanceApiService.getMyMarginTrades(symbol, isolated, null, null,
+        BinanceApiConstants.DEFAULT_RECEIVING_WINDOW, System.currentTimeMillis()));
   }
 
   // user stream endpoints

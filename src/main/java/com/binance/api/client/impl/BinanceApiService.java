@@ -223,14 +223,20 @@ public interface BinanceApiService {
                                                 @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
+    @GET("/sapi/v1/margin/allOrders")
+    Call<List<Order>> getAllMarginOrders(@Query("symbol") String symbol, @Query("isIsolated") boolean isolated, @Query("orderId") Long orderId,
+                                         @Query("limit") Integer limit, @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
+
+    @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/sapi/v1/margin/order")
-    Call<Order> getMarginOrderStatus(@Query("symbol") String symbol, @Query("orderId") Long orderId,
+    Call<Order> getMarginOrderStatus(@Query("symbol") String symbol, @Query("isIsolated") boolean isolated, @Query("orderId") Long orderId,
                                      @Query("origClientOrderId") String origClientOrderId, @Query("recvWindow") Long recvWindow,
                                      @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @GET("/sapi/v1/margin/myTrades")
-    Call<List<Trade>> getMyMarginTrades(@Query("symbol") String symbol, @Query("limit") Integer limit, @Query("fromId") Long fromId,
+    Call<List<Trade>> getMyMarginTrades(@Query("symbol") String symbol, @Query("isIsolated") boolean isolated,
+                                        @Query("limit") Integer limit, @Query("fromId") Long fromId,
                                         @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_APIKEY_HEADER)

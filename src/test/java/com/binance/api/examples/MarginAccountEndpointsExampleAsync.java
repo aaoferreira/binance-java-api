@@ -1,10 +1,8 @@
 package com.binance.api.examples;
 
 import com.binance.api.client.BinanceApiAsyncMarginRestClient;
-import com.binance.api.client.BinanceApiCallback;
 import com.binance.api.client.BinanceApiClientFactory;
 import com.binance.api.client.domain.TransferType;
-import com.binance.api.client.domain.account.MarginTransaction;
 
 /**
  * Examples on how to get margin account information asynchronously.
@@ -23,7 +21,7 @@ public class MarginAccountEndpointsExampleAsync {
     });
 
     // Get list of trades
-    client.getMyTrades("NEOETH", myTrades -> {
+    client.getMyTrades("NEOETH", false, myTrades -> {
       System.out.println(myTrades);
     });
 
