@@ -218,7 +218,7 @@ public interface BinanceApiService {
 
     @Headers(BinanceApiConstants.ENDPOINT_SECURITY_TYPE_SIGNED_HEADER)
     @DELETE("/sapi/v1/margin/order")
-    Call<CancelOrderResponse> cancelMarginOrder(@Query("symbol") String symbol, @Query("orderId") Long orderId,
+    Call<CancelOrderResponse> cancelMarginOrder(@Query("symbol") String symbol, @Query("isIsolated") String isIsolated, @Query("orderId") Long orderId,
                                                 @Query("origClientOrderId") String origClientOrderId, @Query("newClientOrderId") String newClientOrderId,
                                                 @Query("recvWindow") Long recvWindow, @Query("timestamp") Long timestamp);
 

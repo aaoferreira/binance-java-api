@@ -55,7 +55,7 @@ public class BinanceApiAsyncMarginRestClientImpl implements BinanceApiAsyncMargi
 
   @Override
   public void cancelOrder(CancelOrderRequest cancelOrderRequest, BinanceApiCallback<CancelOrderResponse> callback) {
-    binanceApiService.cancelMarginOrder(cancelOrderRequest.getSymbol(),
+    binanceApiService.cancelMarginOrder(cancelOrderRequest.getSymbol(), String.valueOf(cancelOrderRequest.isIsolated()).toUpperCase(),
             cancelOrderRequest.getOrderId(), cancelOrderRequest.getOrigClientOrderId(), cancelOrderRequest.getNewClientOrderId(),
             cancelOrderRequest.getRecvWindow(), cancelOrderRequest.getTimestamp()).enqueue(new BinanceApiCallbackAdapter<>(callback));
   }
